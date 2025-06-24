@@ -1,15 +1,18 @@
 import serial
 import threading
-
+import time
 # DDSM115 motor controller
 # https://www.waveshare.com/wiki/DDSM_Driver_HAT_(A)#Example_Demo
+
+                
 class Motor:
     def __init__(self, id, port="/dev/ttyAMA0", baudrate=115200, heartbeat=-1):
         self.port = port
         self.baudrate = baudrate
         self.ser = self.init_serial()
         self.start_serial()
-        
+
+    
         self.id = self.set_id(id)
         self.set_heartbeat(heartbeat)
 
@@ -58,6 +61,7 @@ class Motor:
     def set_id(self, id):
         try:
             self.ser.write(f'{{"T":10011,"id":{id}}}\n'.encode() + b'\n')
+            return id
         except KeyboardInterrupt:
             print("Error setting id")
 
