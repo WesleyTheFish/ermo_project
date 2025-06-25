@@ -3,13 +3,18 @@ import time
 import serial
 import joystick
 import pipeline as pl
+import traceback
 
 
 def main():
-    assembly = Assembly()
-
-    while True:
-        assembly.update_motor_command()
+    
+    try:
+        assembly = Assembly()
+        while True:
+            assembly.update_motor_command()
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        # traceback.print_exc()
         
 
 if __name__ == "__main__":

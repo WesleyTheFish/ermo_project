@@ -6,7 +6,7 @@ import time
 
                 
 class Motor:
-    def __init__(self, id, port="/dev/ttyAMA0", baudrate=115200, heartbeat=-1):
+    def __init__(self, id, port="/dev/ttyAMA0", baudrate=115200, heartbeat=1000):
         self.port = port
         self.baudrate = baudrate
         self.ser = self.init_serial()
