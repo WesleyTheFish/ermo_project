@@ -12,9 +12,16 @@ class Pipeline:
 # range is distance from center
 def make_deadzone_transform(center, range):
     def function(sample):
+        data_range = 1 - range
         if center - range <= sample <= center + range:
             return center
-        return sample
+        elif sample > center:
+            value = sample-range
+            horz_final_value = value / data_range
+            return horz_final_value
+        value = sample + range
+        horz_final_value = value / data_range
+        return horz_final_value
     return function
 
 def make_expo_transform(expo):
